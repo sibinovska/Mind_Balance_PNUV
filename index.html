@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindBalance – Ученички центар за добросостојба</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="modal-bg" id="calmModal">
+    <div class="modal-box calm-box">
+      <button class="modal-close" id="closeCalm">×</button>
+      <div class="calm-pulse"></div>
+      <h2>Смири се за момент</h2>
+      <p id="calmText">Вдиши полека, задржи кратко и издиши. Не мора сè да се реши одеднаш.</p>
+      <button class="primary-btn" id="calmNext">Следна порака</button>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="activityModal">
+    <div class="modal-box activity-box">
+      <button class="modal-close" id="closeActivity">×</button>
+      <div id="activityContent"></div>
+    </div>
+  </div>
+
+  <button class="chat-button" id="chatButton" aria-label="Отвори чет">💬</button>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-top">
+      <div>
+        <h3>MindBalance асистент</h3>
+        <p>Кратка поддршка за училишен стрес</p>
+      </div>
+      <button id="closeChat">×</button>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="bot-message">
+        Здраво! Напиши како се чувствуваш: „уморно“, „стресно“, „тажно“, „сон“, „учење“ или „пријател“.
+      </div>
+    </div>
+
+    <form class="chat-form" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Напиши порака..." autocomplete="off" />
+      <button type="submit">Прати</button>
+    </form>
+  </div>
+
+  <header class="site-header" id="home">
+    <nav class="navbar">
+      <a href="#home" class="brand">
+        <span class="brand-mark">MB</span>
+        <span>MindBalance</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#stress-test">Проверка на стрес</a>
+        <a href="#relax-zone">Релаксација</a>
+        <a href="#trackers">Навики</a>
+        <a href="#dashboard">Преглед</a>
+        <a href="#info">Инфо</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="pill">Ученички центар за добросостојба</p>
+        <h1>Полесно справување со училишен стрес и подобра емоционална добросостојба.</h1>
+        <p class="hero-text">
+          MindBalance е веб апликација која им помага на младите да го препознаат училишниот стрес
+          и да најдат мали секојдневни начини за подобра добросостојба.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#stress-test">Започни проверка</a>
+          <button class="ghost-btn" id="openCalm">Се чувствувам стресно</button>
+        </div>
+      </div>
+
+      <div class="wellness-card">
+        <div class="floating-emoji">🌿</div>
+        <h3>Денешна состојба</h3>
+        <p id="todayMoodText">Избери расположение во следачот на расположение.</p>
+        <div class="mini-progress"><span></span></div>
+        <small>Малите чекори се сепак напредок.</small>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section intro-section">
+      <div class="section-title">
+        <span class="label">Зошто MindBalance?</span>
+        <h2>Училишниот стрес е реален предизвик кај младите.</h2>
+      </div>
+
+      <div class="intro-grid">
+        <article>
+          <h3>🎒 Притисок од обврски</h3>
+          <p>Тестови, домашни задачи и очекувања можат да создадат чувство на преоптовареност.</p>
+        </article>
+        <article>
+          <h3>😴 Сон и енергија</h3>
+          <p>Лошиот сон влијае на концентрацијата, расположението и мотивацијата за учење.</p>
+        </article>
+        <article>
+          <h3>🤝 Поддршка</h3>
+          <p>Разговор со пријател, наставник или родител може да помогне кога стресот е висок.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section stress-section" id="stress-test">
+      <div class="section-title">
+        <span class="label">Проверка на стрес</span>
+        <h2>Кратка проверка на училишен стрес</h2>
+        <p>Одговори на 5 прашања. Резултатот е само информативен и служи за самосвест.</p>
+      </div>
+
+      <div class="quiz-card">
+        <form id="stressForm">
+          <div class="question">
+            <h3>1. Колку често се чувствуваш преоптоварено од училишни обврски?</h3>
+            <div class="answers">
+              <label><input type="radio" name="q1" value="1" checked> Ретко</label>
+              <label><input type="radio" name="q1" value="2"> Понекогаш</label>
+              <label><input type="radio" name="q1" value="3"> Често</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <h3>2. Колку добро спиеш последната недела?</h3>
+            <div class="answers">
+              <label><input type="radio" name="q2" value="1" checked> Добро</label>
+              <label><input type="radio" name="q2" value="2"> Просечно</label>
+              <label><input type="radio" name="q2" value="3"> Лошо</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <h3>3. Дали имаш некој со кого можеш да разговараш?</h3>
+            <div class="answers">
+              <label><input type="radio" name="q3" value="1" checked> Да</label>
+              <label><input type="radio" name="q3" value="2"> Понекогаш</label>
+              <label><input type="radio" name="q3" value="3"> Не баш</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <h3>4. Колку време поминуваш на телефон пред спиење?</h3>
+            <div class="answers">
+              <label><input type="radio" name="q4" value="1" checked> Малку</label>
+              <label><input type="radio" name="q4" value="2"> Средно</label>
+              <label><input type="radio" name="q4" value="3"> Многу</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <h3>5. Колку често правиш пауза од учење?</h3>
+            <div class="answers">
+              <label><input type="radio" name="q5" value="1" checked> Често</label>
+              <label><input type="radio" name="q5" value="2"> Понекогаш</label>
+              <label><input type="radio" name="q5" value="3"> Ретко</label>
+            </div>
+          </div>
+
+          <button class="primary-btn full-btn" type="submit">Прикажи резултат</button>
+        </form>
+
+        <aside class="result-panel" id="stressResult">
+          <div class="result-icon">🧭</div>
+          <h3>Твојот резултат ќе се појави овде.</h3>
+          <p>Пополнувањето трае помалку од една минута.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section relax-section" id="relax-zone">
+      <div class="section-title">
+        <span class="label">Зона за релаксација</span>
+        <h2>Смирувачки активности за кратка пауза</h2>
+      </div>
+
+      <div class="relax-grid">
+        <article class="tool-card">
+          <h3>Вежба за дишење</h3>
+          <p>Кратка вежба со круг што се шири и собира.</p>
+          <div class="preview-circle">Диши</div>
+          <button class="primary-btn" id="openBreathing">Отвори вежба</button>
+        </article>
+
+        <article class="tool-card quote-card">
+          <h3>Дневна мотивација</h3>
+          <p id="quoteText">„Малите чекори се сепак напредок.“</p>
+          <button class="secondary-btn" id="quoteBtn">Дај ми мотивација</button>
+        </article>
+
+        <article class="tool-card">
+          <h3>Рулет за грижа за себе</h3>
+          <div class="preview-wheel">🎡</div>
+          <p>Добиј мала активност што може да ти го подобри денот.</p>
+          <button class="secondary-btn" id="openRoulette">Отвори рулет</button>
+        </article>
+      </div>
+
+      <div class="game-wrap">
+        <div class="game-info">
+          <h3>Мини игра</h3>
+          <p>Фати позитивни симболи 🌟💗🌿 и избегнувај стресни симболи 😡📚⚡. Играта трае 30 секунди.</p>
+          <div class="game-stats">
+            <span>Поени: <b id="gameScore">0</b></span>
+            <span>Време: <b id="gameTime">30</b> сек.</span>
+          </div>
+          <button class="primary-btn" id="startGameBtn">Започни игра</button>
+        </div>
+        <div class="game-area" id="gameArea">
+          <p class="game-placeholder">Кликни „Започни игра“</p>
+        </div>
+      </div>
+
+      <div class="music-card">
+        <div>
+          <h3>Видеа за учење и смирувачка музика</h3>
+          <p>Овие видеа се наменети за полесно фокусирање, релаксација и создавање мирна атмосфера за учење.</p>
+        </div>
+        <div class="video-grid">
+          <iframe src="https://www.youtube.com/embed/mPZkdNFkNps" title="Музика за учење" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/2OEL4P1Rz04" title="Смирувачка музика" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tracker-section" id="trackers">
+      <div class="section-title">
+        <span class="label">Следење навики</span>
+        <h2>Следење расположение, сон и дневни навики</h2>
+      </div>
+
+      <div class="tracker-grid">
+        <article class="tool-card">
+          <h3>Следач на расположение</h3>
+          <p>Како се чувствуваш денес?</p>
+          <div class="mood-options">
+            <button data-mood="добро" data-emoji="😊">😊<span>добро</span></button>
+            <button data-mood="неутрално" data-emoji="😐">😐<span>неутрално</span></button>
+            <button data-mood="стресно" data-emoji="😟">😟<span>стресно</span></button>
+          </div>
+          <p class="saved-text" id="moodSaved">Нема зачувано расположение.</p>
+        </article>
+
+        <article class="tool-card">
+          <h3>Следач на сон</h3>
+          <p>Колку часа спиеше минатата вечер?</p>
+          <input type="number" id="sleepHours" min="0" max="14" placeholder="Пр. 7" />
+          <button class="secondary-btn" id="sleepBtn">Провери сон</button>
+          <div class="sleep-result" id="sleepResult">Внеси часови за совет.</div>
+        </article>
+
+        <article class="tool-card">
+          <h3>Тајмер за дигитална пауза</h3>
+          <p>Направи 5 минутна пауза од социјални мрежи.</p>
+          <div class="timer" id="detoxTimer">05:00</div>
+          <button class="primary-btn" id="startTimerBtn">Започни пауза</button>
+          <button class="ghost-dark-btn" id="resetTimerBtn">Ресетирај</button>
+        </article>
+      </div>
+
+      <div class="challenge-section">
+        <div class="section-title compact">
+          <span class="label">Дневни предизвици</span>
+          <h2>Мали задачи за подобар ден</h2>
+        </div>
+
+        <div class="challenge-grid">
+          <button class="challenge-card" data-challenge="walk">🚶 10 минути прошетка <span>Завршено</span></button>
+          <button class="challenge-card" data-challenge="phone">📵 Исклучи телефон 30 минути пред спиење <span>Завршено</span></button>
+          <button class="challenge-card" data-challenge="gratitude">📝 Напиши 3 работи за кои си благодарна <span>Завршено</span></button>
+          <button class="challenge-card" data-challenge="friend">💬 Разговарај со пријател <span>Завршено</span></button>
+          <button class="challenge-card" data-challenge="break">☕ Направи пауза од 5 минути <span>Завршено</span></button>
+        </div>
+      </div>
+
+      <div class="calendar-card">
+        <div>
+          <h3>Календар на расположение</h3>
+          <p>Последни 7 записи зачувани во прелистувачот.</p>
+        </div>
+        <div class="mood-calendar" id="moodCalendar"></div>
+        <p class="week-summary" id="weekSummary">Нема доволно податоци за неделен преглед.</p>
+      </div>
+    </section>
+
+    <section class="section dashboard-section" id="dashboard">
+      <div class="section-title">
+        <span class="label">Личен преглед</span>
+        <h2>Твој личен преглед на добросостојба</h2>
+      </div>
+
+      <div class="stats-grid">
+        <article><span id="completedCount">0</span><p>завршени предизвици</p></article>
+        <article><span id="lastMood">—</span><p>последно расположение</p></article>
+        <article><span id="lastStress">—</span><p>последен резултат за стрес</p></article>
+        <article><span id="lastSleep">—</span><p>последен статус за сон</p></article>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card">
+          <h3>Показатели за училишен стрес</h3>
+          <div class="bar-item"><label>Ученици што чувствуваат притисок</label><div class="bar"><span style="width: 72%"></span></div></div>
+          <div class="bar-item"><label>Проблеми со сон</label><div class="bar"><span style="width: 58%"></span></div></div>
+          <div class="bar-item"><label>Високо време пред екран</label><div class="bar"><span style="width: 66%"></span></div></div>
+        </article>
+
+        <article class="chart-card">
+          <h3>Емоционална добросостојба</h3>
+          <canvas id="moodChart" width="500" height="260"></canvas>
+        </article>
+      </div>
+    </section>
+
+    <section class="section info-section" id="info">
+      <div class="section-title">
+        <span class="label">HBSC идеја</span>
+        <h2>Здравје, навики и добросостојба кај ученици</h2>
+      </div>
+      <p>
+        MindBalance е инспириран од идејата на HBSC истражувањата: разбирање на здравјето,
+        навиките и добросостојбата кај ученици од 11 до 15 години. Апликацијата се фокусира
+        на училишен стрес, емоционална писменост, сон, дигитален баланс и мали секојдневни активности.
+      </p>
+      <div class="safe-note">
+        <strong>Важно:</strong> MindBalance е едукативна апликација за добросостојба. Не заменува разговор
+        со родител, наставник, психолог или стручно лице кога е потребна поддршка.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>MindBalance</strong>
+    <span>Ученички центар за добросостојба</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
